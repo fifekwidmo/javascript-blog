@@ -1,7 +1,6 @@
 'use strict';
 
 const titleClickHandler = function(event) {
-    console.log('Link was clicked!');
     console.log(event);
     event.preventDefault();
     /* [DONE] remove class 'active' from all article links  */
@@ -75,7 +74,6 @@ function generateTags() {
         for (let tag of articleTagsArray) {
             let htmlTags = '<li><a href="#tag-' + tag + '"> ' + tag + ' </a></li>';
             /* generate HTML of the link */
-            console.log(tag);
             /* add generated code to HTML variable */
             html = html + htmlTags;
         }
@@ -88,15 +86,16 @@ generateTags();
 
 function tagClickHandler(event) {
     /* prevent default action for this event */
-
+    event.preventDefault();
     /* make new constant named "clickedElement" and give it the value of "this" */
-
+    const clickedElement = this;
     /* make a new constant "href" and read the attribute "href" of the clicked element */
-
+    const href = clickedElement.getAttribute('href');
     /* make a new constant "tag" and extract tag from the "href" constant */
-
+    const tag = href.replace('#tag-', '');
     /* find all tag links with class active */
-
+    const allTagLinks = tag.getAttribute('a.active[href^="#tag-"]');
+    console.log(allTagLinks);
     /* START LOOP: for each active tag link */
 
     /* remove class active */
@@ -113,6 +112,7 @@ function tagClickHandler(event) {
 
     /* execute function "generateTitleLinks" with article selector as argument */
 }
+tagClickHandler();
 
 function addClickListenersToTags() {
     /* find all links to tags */
