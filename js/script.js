@@ -29,13 +29,12 @@ const optArticleSelector = '.post',
     optTitleListSelector = '.titles',
     optArticleTagsSelector = '.post-tags .list';
 
-
-function generateTitleLinks() {
+function generateTitleLinks(customSelector = '') {
     /* [DONE] remove contents of titleList */
     const titleList = document.querySelector(optTitleListSelector);
     titleList.innerHTML = '';
     /* for each article */
-    const articles = document.querySelectorAll(optArticleSelector);
+    const articles = document.querySelectorAll(optArticleSelector + customSelector);
     let html = '';
     for (let article of articles) {
         /* get the article id */
