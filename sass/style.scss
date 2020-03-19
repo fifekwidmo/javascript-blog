@@ -70,6 +70,10 @@ body {
     border-radius: 5px;
 }
 
+aside h2 {
+    text-align: center;
+}
+
 
 /* Logo */
 
@@ -88,6 +92,9 @@ body {
     list-style-type: none;
     margin: 0;
     padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
     .active {
         font-weight: bold;
     }
@@ -128,4 +135,30 @@ body {
     p {
         margin: 0 10px 0 0;
     }
+}
+
+// tags
+.tag-size-1 {
+    font-size: 35%;
+    display: inline;
+}
+
+.tag-size-2 {
+    font-size: 50%;
+    display: inline;
+}
+
+.tag-size-3 {
+    font-size: 65%;
+    display: inline;
+}
+
+.tag-size-4 {
+    font-size: 75%;
+    display: inline;
+}
+
+.tag-size-5 {
+    font-size: 85%;
+    display: inline;
 }
