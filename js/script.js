@@ -179,15 +179,17 @@ function generateAuthors() {
     let allAuthors = {};
     const articles = document.querySelectorAll(optArticleSelector);
     for (const article of articles) {
-        let html = '';
+        let authorHTML = '';
         const articleAuthor = article.getAttribute('data-authors');
-        let htmlAuthors = '<a href="#author-' + articleAuthor + '"> ' + articleAuthor + ' </a>';
-        html = html + htmlAuthors;
+        let linkHTML = '<a href="#author-' + articleAuthor + '"> ' + articleAuthor + ' </a>';
+        authorHTML += linkHTML;
         if (!allAuthors[articleAuthor]) {
             allAuthors[articleAuthor] = 1;
         } else {
             allAuthors[articleAuthor]++;
         }
+        /* insert HTML of all the links into the tags wrapper */
+        article.querySelector(optArticleAuthorSelector).innerHTML = authorHTML;
         const authorList = document.querySelector('.authors');
         let allAuthorsHTML = '';
         for (let articleAuthor in allAuthors) {
