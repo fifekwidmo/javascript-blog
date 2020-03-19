@@ -2,8 +2,9 @@
 const templates = {
     articleLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML),
     tagLink: Handlebars.compile(document.querySelector('#template-tag-link').innerHTML),
-    authorLink: Handlebars.compile(document.querySelector('#template-author-link').innerHTML)
-}
+    authorLink: Handlebars.compile(document.querySelector('#template-author-link').innerHTML),
+    tagCloudLink: Handlebars.compile(document.querySelector('#template-tag-cloud-link').innerHTML)
+};
 const titleClickHandler = function(event) {
     console.log(event);
     event.preventDefault();
@@ -69,7 +70,7 @@ function calculateTagsParams(tags) {
     const params = {
         max: 0,
         min: 99999
-    }
+    };
     for (let tag in tags) {
         if (tags[tag] > params.max) {
             params.max = tags[tag];
@@ -127,20 +128,22 @@ function generateTags() {
         /* END LOOP: for every article: */
         /* [NEW] find list of tags in right column */
         const tagList = document.querySelector('.tags');
-
         /* [NEW] create variable for all links HTML code */
         const tagsParams = calculateTagsParams(allTags);
-        let allTagsHTML = '';
-
+        // let allTagsHTML = '';
+        const allTagsData = { tags: [] };
         /* [NEW] START LOOP: for each tag in allTags: */
         for (let tag in allTags) {
-            /* [NEW] generate code of a link and add it to allTagsHTML */
-            // const tagLinkHTML = '<li><a href="#tag-' + tag + '">' + '(' + calculateTagClass(allTags[tag], tagsParams) + ')' + tag + '</a></li>';
-            const tagLinkHTML = '<li><a href="#tag-' + tag + '" class="' + calculateTagClass(allTags[tag], tagsParams) + '">' + tag + '</a></li>';
-            // allTagsHTML += '<li><a href="#tag-' + tag + '"> ( ' + allTags[tag] + ' ) ' + tag + ' </a></li>';
-            allTagsHTML += tagLinkHTML;
+            // const tagLinkHTML = '<li><a href="#tag-' + tag + '" class="' + calculateTagClass(allTags[tag], tagsParams) + '">' + tag + '</a></li>';
+
+            allTagsData.tags.push({
+                tag: tag,
+                count: allTags[tag],
+                className: calculateTagClass(allTags[tag], tagsParams)
+            });
         }
-        tagList.innerHTML = allTagsHTML;
+        tagList.innerHTML = templates.tagCloudLink(allTagsData);
+        console.log(allTagsData);
     }
 }
 generateTags();
@@ -192,16 +195,9 @@ function generateAuthors() {
     for (const article of articles) {
         let authorHTML = '';
         const articleAuthor = article.getAttribute('data-authors');
-
-
-
         // let linkHTML = '<a href="#authors-' + articleAuthor + '"> ' + articleAuthor + ' </a>';
-
         const linkHTMLData = { id: articleAuthor, title: articleAuthor };
         const linkHTML = templates.authorLink(linkHTMLData);
-
-
-
         authorHTML += linkHTML;
         if (!allAuthors[articleAuthor]) {
             allAuthors[articleAuthor] = 1;
