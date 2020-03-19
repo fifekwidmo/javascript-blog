@@ -78,16 +78,24 @@ aside h2 {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
 }
 
 .list .active {
   font-weight: bold;
+}
+
+.tags {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.tags li {
+  display: inline-block;
+  margin-right: 5px;
 }
 
 .list-horizontal li {
