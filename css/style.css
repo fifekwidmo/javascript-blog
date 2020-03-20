@@ -108,6 +108,10 @@ aside h2 {
   margin-bottom: 12px;
 }
 
+.authors a {
+  text-decoration: none;
+}
+
 /* Post */
 .post {
   display: none;
